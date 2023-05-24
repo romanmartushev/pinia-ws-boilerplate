@@ -22,6 +22,8 @@ cartStore.$subscribe((mutation, state) => {
 <template>
   <div class="container">
     <TheHeader />
+    <button @click="cartStore.undo()">Undo</button>
+    <button @click="cartStore.redo()">Redo</button>
     <ul class="sm:flex flex-wrap lg:flex-nowrap gap-5">
       <template v-if="productStore.products.length !== 0">
         <ProductCard

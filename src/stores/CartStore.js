@@ -2,6 +2,7 @@ import { defineStore } from "pinia";
 import { useProductStore } from "@/stores/ProductStore";
 
 export const useCartStore = defineStore("CartStore", {
+  undoredo: true,
   state: () => {
     return {
       items: localStorage.getItem("myCart")
@@ -21,6 +22,12 @@ export const useCartStore = defineStore("CartStore", {
         this.items.push({ id: itemId, count: count });
       }
       return count;
+    },
+    undo() {
+      return;
+    },
+    redo() {
+      return;
     },
   },
   getters: {
