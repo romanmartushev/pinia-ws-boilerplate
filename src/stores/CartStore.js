@@ -4,7 +4,9 @@ import { useProductStore } from "@/stores/ProductStore";
 export const useCartStore = defineStore("CartStore", {
   state: () => {
     return {
-      items: [],
+      items: localStorage.getItem("myCart")
+        ? JSON.parse(localStorage.getItem("myCart")).items
+        : [],
     };
   },
   actions: {
@@ -18,6 +20,7 @@ export const useCartStore = defineStore("CartStore", {
       } else {
         this.items.push({ id: itemId, count: count });
       }
+      return count;
     },
   },
   getters: {

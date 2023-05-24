@@ -7,6 +7,16 @@ import { useCartStore } from "@/stores/CartStore";
 const cartStore = useCartStore();
 const productStore = useProductStore();
 productStore.fill();
+
+cartStore.$onAction(({ name, after }) => {
+  if (name === "addItem") {
+    after((count) => alert(`You've added ${count} items to the cart!`));
+  }
+});
+
+cartStore.$subscribe((mutation, state) => {
+  localStorage.setItem("myCart", JSON.stringify(state));
+});
 </script>
 
 <template>
