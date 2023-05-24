@@ -11,9 +11,9 @@ export const useCartStore = defineStore("CartStore", {
       if (count === 0) {
         return;
       }
-      const index = this.items.findIndex((item) => item.id === itemId);
-      if (index !== -1) {
-        this.items[index].count += count;
+      const item = this.items.find((item) => item.id === itemId);
+      if (item) {
+        item.count += count;
       } else {
         this.items.push({ id: itemId, count: count });
       }
