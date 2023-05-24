@@ -19,4 +19,14 @@ export const useCartStore = defineStore("CartStore", {
       }
     },
   },
+  getters: {
+    total() {
+      return this.items.reduce((prev, current) => {
+        return current.count + prev;
+      }, 0);
+    },
+    isEmpty() {
+      return this.total === 0;
+    },
+  },
 });
