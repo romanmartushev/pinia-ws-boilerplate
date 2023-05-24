@@ -15,4 +15,9 @@ export const useProductStore = defineStore("ProductStore", {
         });
     },
   },
+  getters: {
+    productById() {
+      return (id) => this.products.find((product) => product.id === id);
+    },
+  },
 });

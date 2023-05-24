@@ -1,4 +1,5 @@
 import { defineStore } from "pinia";
+import { useProductStore } from "@/stores/ProductStore";
 
 export const useCartStore = defineStore("CartStore", {
   state: () => {
@@ -20,13 +21,21 @@ export const useCartStore = defineStore("CartStore", {
     },
   },
   getters: {
-    total() {
+    count() {
       return this.items.reduce((prev, current) => {
         return current.count + prev;
       }, 0);
     },
     isEmpty() {
-      return this.total === 0;
+      return this.count === 0;
+    },
+    total() {
+      const productStore = useProductStore();
+      return this.items.reduce((prev, current) => {
+        return (
+          productStore.productById(current.id).price * current.count + prev
+        );
+      }, 0);
     },
   },
 });
